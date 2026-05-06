@@ -15,7 +15,7 @@ def init_csv():
         df.to_csv(CSV_FILE, index=False)
 
 
-#validation funcation
+#validation function  #PATTERNS / RANGES
 
 
 def validate_email(email):
@@ -27,10 +27,10 @@ def validate_email(email):
 
 
 def validate_phone(phone):
-    """Phone Validation for Pakistani number format"""
+    """Phone Validation for Pakistani number format"""   
     #Removing spaces and dashes from phone number
 
-    phone = re.sub(r'[\s\-]','',phone)
+    phone = re.sub(r'[\s\-]','',phone)    # agr ksii ne backslash lagya hua hai phone numebr me tw woh usko clean krdy
 
 #check different phone formats
 
@@ -40,11 +40,11 @@ def validation_phone(phone):
         r'^03[0-9]{9}$',  #03XXXXXXXXXXXXX (Pakistan Mobile Number)
         r'^3[0-9]{9}$',    #3XXXXXXXXXX
         r'^\+923[0-9]{9}$',  #+923XXXXXXXX  
-        r'^[0-9]{11}$',     #11 digits 
+        #r'^[0-9]{11}$',     #11 digits 
         r'^00923[0-9]{9}$'
     ]
 
-    for pattern in pattern:
+    for pattern in pattern:   #looplagay kpattern match krrh h ya nh
         if re.match(pattern,phone):
             return True, "Valid Phone Number"
     return False, "Invalid Phone Number"
@@ -61,16 +61,16 @@ def validation_password(password):
         errors.append("less then 20 Characters")
     if not re.search(r'[A-Z]',password):
         errors.append("at least one uppercase letters")
-    if not re.serach(r'[a-z]',password):
+    if not re.search(r'[a-z]',password):
         errors.append("at least one lowercase letters")
-    if not re.serach(r'[0-9]',password):
+    if not re.search(r'[0-9]',password):
         errors.append("at least one number")
-    if not re.serach(r'[!@#$%*&^]',password):
+    if not re.search(r'[!@#$%*&^]',password):
         errors.append("At one special character (!@#$%*&^):")  
 
     if errors:
         return False, f"password must have:{','.join(errors)}"
-    return True, "Strong Password"    
+    return True, "Strong Password"      #agr kch b match ni krrh  tw yh msg pass krdeyga
 
 def validate_name(name,field_name="Name"):
 
@@ -78,7 +78,7 @@ def validate_name(name,field_name="Name"):
         return False, f"{field_name} must be at least 2 Characters"
     if len(name) >50:
         return False, f"{field_name} must be at least 50 Characters"
-    if not re.match(r'^[a-zA-Z\s\-]+$',name):
+    if not re.match(r'^[a-zA-Z\s\-]+$',name):  #join k lie deal krrh h k exactly wahi hona chhye
         return False, f"{field_name} can only contains letters, spaces, and hyphens"
     return True, f"Valid {field_name}"
 
