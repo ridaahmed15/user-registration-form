@@ -36,5 +36,7 @@ st.sidebar.info("""
 
 if st.session_state.page =="Register":
     st.switch_page("pages/01_register.py")
+elif st.session_state.page=="App":
+    st.switch_page("app.py")
 else:
     st.switch_page("pages/02_login.py")

@@ -2,7 +2,7 @@
 
 import streamlit as st
 #import re #regular expression
-from utils import (
+from utils import (    #utils(utilities) is a package made for validations/
     validate_email,validate_name,validate_login,validation_password,
     validation_phone,validate_user_id,save_user
 )
@@ -111,7 +111,25 @@ with st.form("Registration Form",clear_on_submit=False): #submit krne k bd field
         else:
             #ALL VALIDATIONS PASSED
             if save_user(user_id,full_name,email,phone,password):
+                st.snow()
                 st.success("REGISTRATION SUCCESSFULL!")
+                st.info(f"""
+                        WELCOME {full_name}!
+
+                        Your account has been created successfully!
+
+                        **NEXT STEP: Please login using your credentials**
+                        
+                        """)
+
+                #add login button
+                if st.form_submit_button("Go to Login Page:"):  #st.button bhe use krskty agr ni chlrh. use if not working
+                    st.session_state.page="Login"
+                    st.switch_page("pages\02_login.py")
+
+            else:
+                st.error("Registration Failed!")
+
 
    
 
